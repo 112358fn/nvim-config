@@ -9,7 +9,12 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "rust_analyzer", "ruff", "pyright" },
+				ensure_installed = { 
+          "lua_ls",
+          "rust_analyzer",
+          "ruff", "pyright",
+          "zk", "marksman", "markdown_oxide",
+        },
 			})
 		end,
 	},
@@ -21,11 +26,15 @@ return {
 			lspconfig.lua_ls.setup({ capabilities = capabilities })
 			lspconfig.ruff.setup({ capabilities = capabilities })
 			lspconfig.pyright.setup({ capabilities = capabilities })
+			lspconfig.zk.setup({ capabilities = capabilities })
+			lspconfig.marksman.setup({ capabilities = capabilities })
+			lspconfig.markdown_oxide.setup({ capabilities = capabilities })
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
 		end,
 	},
 	{
@@ -35,9 +44,10 @@ return {
 			null_ls.setup({
 				sources = {
 					null_ls.builtins.formatting.stylua,
+          null_ls.builtins.diagnostics.markdownlint,
+          null_ls.builtins.formatting.markdownlint
 				},
 			})
-			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
 		end,
 	},
 }

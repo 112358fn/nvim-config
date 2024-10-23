@@ -1,9 +1,9 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		dependecies = {
-			"rcarriga/nvim-dap-ui",
-		},
+		-- dependecies = {
+		-- 	"rcarriga/nvim-dap-ui",
+		-- },
 		config = function()
 			local dap = require("dap")
 			local dapui = require("dapui")
