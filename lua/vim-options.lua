@@ -1,7 +1,9 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.textwidth = 79
+vim.opt.formatoptions:append({ w = true, r = true, o = true })
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -30,7 +32,7 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"
+	vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Enable break indent
@@ -104,12 +106,16 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-
 vim.keymap.set("n", "<A-I>", "<C-i>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<A-O>", "<C-o>", { desc = "Move focus to the upper window" })
 
 -- Open parent directory
-vim.keymap.set("n", "<A-J>", '<cmd>! zellij action new-pane --cwd="%:p:h" -- $SHELL<CR>', { desc = "Move focus to the upper window" })
+vim.keymap.set(
+	"n",
+	"<A-J>",
+	'<cmd>! zellij action new-pane --cwd="%:p:h" -- $SHELL<CR>',
+	{ desc = "Move focus to the upper window" }
+)
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -117,11 +123,11 @@ vim.keymap.set("n", "<A-J>", '<cmd>! zellij action new-pane --cwd="%:p:h" -- $SH
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 -- Launch Telescope File Find when opening a directory
@@ -130,27 +136,27 @@ local find_files_hijack_netrw = vim.api.nvim_create_augroup("find_files_hijack_n
 -- netrw may or may not be loaded before telescope-find-files
 -- conceptual credits to nvim-tree and telescope-file-browser
 vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*",
-  once = true,
-  callback = function()
-    pcall(vim.api.nvim_clear_autocmds, { group = "FileExplorer" })
-  end,
+	pattern = "*",
+	once = true,
+	callback = function()
+		pcall(vim.api.nvim_clear_autocmds, { group = "FileExplorer" })
+	end,
 })
 vim.api.nvim_create_autocmd("BufEnter", {
-  group = find_files_hijack_netrw,
-  pattern = "*",
-  callback = function()
-    vim.schedule(function()
-      -- Early return if netrw or not a directory
-      if vim.bo[0].filetype == "netrw" or vim.fn.isdirectory(vim.fn.expand("%:p")) == 0 then
-        return
-      end
+	group = find_files_hijack_netrw,
+	pattern = "*",
+	callback = function()
+		vim.schedule(function()
+			-- Early return if netrw or not a directory
+			if vim.bo[0].filetype == "netrw" or vim.fn.isdirectory(vim.fn.expand("%:p")) == 0 then
+				return
+			end
 
-      vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")
+			vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")
 
-      require("telescope.builtin").find_files({
-        cwd = vim.fn.expand("%:p:h"),
-      })
-    end)
-  end,
+			require("telescope.builtin").find_files({
+				cwd = vim.fn.expand("%:p:h"),
+			})
+		end)
+	end,
 })
