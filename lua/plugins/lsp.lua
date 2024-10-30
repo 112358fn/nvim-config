@@ -9,12 +9,13 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { 
-          "lua_ls",
-          "rust_analyzer",
-          "ruff", "pyright",
-          "zk", "marksman", "markdown_oxide",
-        },
+				ensure_installed = {
+					"lua_ls",
+					"rust_analyzer",
+					"ruff",
+					"pyright",
+					"marksman",
+				},
 			})
 		end,
 	},
@@ -26,9 +27,7 @@ return {
 			lspconfig.lua_ls.setup({ capabilities = capabilities })
 			lspconfig.ruff.setup({ capabilities = capabilities })
 			lspconfig.pyright.setup({ capabilities = capabilities })
-			lspconfig.zk.setup({ capabilities = capabilities })
-			lspconfig.marksman.setup({ capabilities = capabilities })
-			lspconfig.markdown_oxide.setup({ capabilities = capabilities })
+			lspconfig.marksman.setup({ capabilities = capabilities, single_file_support = false })
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
@@ -44,10 +43,22 @@ return {
 			null_ls.setup({
 				sources = {
 					null_ls.builtins.formatting.stylua,
-          null_ls.builtins.diagnostics.markdownlint,
-          null_ls.builtins.formatting.markdownlint
+					null_ls.builtins.diagnostics.markdownlint,
+					null_ls.builtins.formatting.markdownlint,
 				},
 			})
+		end,
+	},
+	{
+		"nvimdev/guard.nvim",
+		dependencies = {
+			"nvimdev/guard-collection",
+		},
+		config = function()
+			vim.g.guard_config = {
+				fmt_on_save = true,
+				lsp_as_default_formatter = true,
+			}
 		end,
 	},
 }
