@@ -1,12 +1,8 @@
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.textwidth = 79
-vim.opt.formatoptions:append({ w = true, r = true, o = true })
+-- [[ Lua vim variables ]]
+-- See `:help lua-vim-variables`
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -17,12 +13,34 @@ vim.g.have_nerd_font = true
 -- See `:help vim.opt`
 --  For more options, you can see `:help option-list`
 
+-- Replace tab with 2 spaces
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+-- Indent by 2 spaces
+vim.opt.shiftwidth = 2
+-- Automatic formating options
+vim.opt.textwidth = 79
+vim.opt.formatoptions = {
+	t = true, -- Autowrap using textwidth
+	c = true, -- Autowrap comments
+	r = true, -- Insert comment leader with <Enter>
+	o = true, -- Insert comment with 'O' or 'o'
+	w = true, -- Whitespace continues paragraph
+	j = true, -- Join comments
+	q = true, -- Format comments with gq
+	l = true, -- Long lines in insert mode
+}
+-- Set winbar to show filename in the left
+vim.opt.winbar = "%=%m %f"
+
 -- Make line numbers default
 vim.opt.number = true
 -- vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
+vim.opt.mousescroll = "ver:1,hor:0"
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -53,7 +71,7 @@ vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 600
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -74,89 +92,11 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Diagnostic keymaps
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
--- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- Disable arrow keys in normal mode
-vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-
-vim.keymap.set("n", "<A-I>", "<C-i>", { desc = "Move focus to the upper window" })
-vim.keymap.set("n", "<A-O>", "<C-o>", { desc = "Move focus to the upper window" })
-
--- Open parent directory
-vim.keymap.set(
-	"n",
-	"<A-J>",
-	'<cmd>! zellij action new-pane --cwd="%:p:h" -- $SHELL<CR>',
-	{ desc = "Move focus to the upper window" }
-)
-
+-- Global statusline
+vim.opt.laststatus = 3
 -- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
-
--- Launch Telescope File Find when opening a directory
-local find_files_hijack_netrw = vim.api.nvim_create_augroup("find_files_hijack_netrw", { clear = true })
--- clear FileExplorer appropriately to prevent netrw from launching on folders
--- netrw may or may not be loaded before telescope-find-files
--- conceptual credits to nvim-tree and telescope-file-browser
-vim.api.nvim_create_autocmd("VimEnter", {
-	pattern = "*",
-	once = true,
-	callback = function()
-		pcall(vim.api.nvim_clear_autocmds, { group = "FileExplorer" })
-	end,
-})
-vim.api.nvim_create_autocmd("BufEnter", {
-	group = find_files_hijack_netrw,
-	pattern = "*",
-	callback = function()
-		vim.schedule(function()
-			-- Early return if netrw or not a directory
-			if vim.bo[0].filetype == "netrw" or vim.fn.isdirectory(vim.fn.expand("%:p")) == 0 then
-				return
-			end
-
-			vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")
-
-			require("telescope.builtin").find_files({
-				cwd = vim.fn.expand("%:p:h"),
-			})
-		end)
-	end,
-})
+--  See `:help lua-guide-autocommands`-- [[ Basic Autocommands ]]
