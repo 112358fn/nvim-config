@@ -21,7 +21,7 @@ return {
   {
     "jay-babu/mason-null-ls.nvim",
     dependencies = {
-      "nvimtools/none-ls.nvim",
+      "williamboman/mason.nvim",
     },
     opts = {
       automatic_installation = true,
@@ -60,7 +60,7 @@ return {
         sources = {
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.diagnostics.markdownlint,
-          null_ls.builtins.formatting.markdownlint,
+          null_ls.builtins.formatting.prettierd,
         },
       }
     end,
@@ -83,11 +83,12 @@ return {
   -- Improve nvim lsp experience
   {
     "nvimdev/lspsaga.nvim",
-    event = 'LspAttach',
+    event = "LspAttach",
     config = true,
     keys = {
       { "<leader>ca", "<cmd>Lspsaga code_action<cr>", desc = "LSP code action" },
-      {"K", '<cmd>Lspsaga hover_doc<cr>', desc = "LSP hover"}
+      { "K",          "<cmd>Lspsaga hover_doc<cr>",   desc = "LSP hover" },
+      { "<leader>to", "<cmd>Lspsaga outline<cr>",     desc = "LSP outline" },
     },
   },
 }
