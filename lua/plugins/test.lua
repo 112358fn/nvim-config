@@ -8,7 +8,9 @@ return {
     config = function()
       require("neotest").setup({
         adapters = {
-          require("neotest-python"),
+          require("neotest-python")({
+            pytest_discover_instances = true,
+          }),
           require("neotest-rust")({
             args = { "--no-capture" },
             dap_adapter = "codelldb",
