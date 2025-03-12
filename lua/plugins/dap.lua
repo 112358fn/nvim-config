@@ -10,7 +10,7 @@ return {
     },
     opts = {
       -- automatic_installation = true,
-      ensure_installed = { "delve", "codelldb" },
+      ensure_installed = { "delve", "codelldb", "python" },
       handlers = {},
     },
   },
@@ -24,31 +24,20 @@ return {
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
-      dap.adapters = {
-        codelldb = {
-          type = "executable",
-          command = "codelldb",
-        },
+      dap.adapters.codelldb = {
+        type = "executable",
+        command = "codelldb",
       }
-      dap.listeners.before = {
-        ["attach"] = {
-          ["dapui_config"] = function() dapui.open() end,
-        },
-        ["launch"] = {
-          ["dapui_config"] = function() dapui.open() end,
-        },
-        ["event_terminated"] = {
-          ["dapui_config"] = function() dapui.close() end
-        },
-        ["event_exited"] = {
-          ["dapui_config"] = function() dapui.close() end
-        },
-      }
+      -- :h dap-extensions
+      dap.listeners.before.attach.dapui_config = function() dapui.open() end
+      dap.listeners.before.launch.dapui_config = function() dapui.open() end
+      dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+      dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
     end,
     keys = {
       { "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "[d]ebug toggle [b]reakpoint" },
       { "<leader>dc", "<cmd>DapContinue<cr>",         desc = "[d]ebug [c]ontinue" },
-    }
+    },
   },
   -- nvim-dap-ui
   -- UI for nvim-dap
@@ -64,15 +53,12 @@ return {
   -- nvim-dap-python
   -- Python extension for nvim-dap
   -- configurations to debug python with debugpy
-  -- {
-  --   "mfussenegger/nvim-dap-python",
-  --   dependencies = {
-  --     "mfussenegger/nvim-dap",
-  --   },
-  --   config = function()
-  --     require("dap-python").setup("python")
-  --   end,
-  -- },
+  {
+    "mfussenegger/nvim-dap-python",
+    config = function()
+      require("dap-python").setup("python")
+    end,
+  },
   -- nvim-dap-go
   -- Go extension for nvim-dap
   -- configurations to debug Go with delve
