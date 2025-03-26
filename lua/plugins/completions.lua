@@ -1,4 +1,8 @@
 return {
+  -- gh Copilot
+  { "github/copilot.vim", },
+  -- nvim-cmp
+  -- Completion Engine
   {
     "hrsh7th/nvim-cmp",
     config = function()
