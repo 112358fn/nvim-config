@@ -22,14 +22,14 @@ vim.opt.shiftwidth = 2
 -- Automatic formating options
 vim.opt.textwidth = 79
 vim.opt.formatoptions = {
-	t = true, -- Autowrap using textwidth
-	c = true, -- Autowrap comments
-	r = true, -- Insert comment leader with <Enter>
-	o = true, -- Insert comment with 'O' or 'o'
-	w = true, -- Whitespace continues paragraph
-	j = true, -- Join comments
-	q = true, -- Format comments with gq
-	l = true, -- Long lines in insert mode
+  t = true, -- Autowrap using textwidth
+  c = true, -- Autowrap comments
+  r = true, -- Insert comment leader with <Enter>
+  o = true, -- Insert comment with 'O' or 'o'
+  w = true, -- Whitespace continues paragraph
+  j = true, -- Join comments
+  q = true, -- Format comments with gq
+  l = true, -- Long lines in insert mode
 }
 -- Set winbar to show filename in the left
 vim.opt.winbar = "%=%m %f"
@@ -50,7 +50,7 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Enable break indent
