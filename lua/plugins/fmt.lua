@@ -43,4 +43,5 @@ return {
       }
     end,
   },
+  { "imsnif/kdl.vim" },
 }
