@@ -4,6 +4,8 @@ return {
     "rcarriga/nvim-notify",
     opts = {
       max_width = 60,
+      render = "minimal",
+      top_down = false,
     },
   },
   {
