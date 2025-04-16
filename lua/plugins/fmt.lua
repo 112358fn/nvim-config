@@ -29,19 +29,5 @@ return {
       }
     end,
   },
-  -- guard.nvim
-  -- Async formatting and linting
-  -- NOTE: only used for format using LSP and on save
-  {
-    "nvimdev/guard.nvim",
-    init = function()
-      vim.g.guard_config = {
-        fmt_on_save = true, -- format on write to buffer
-        lsp_as_default_formatter = true,
-        save_on_fmt = true,
-        auto_lint = false,
-      }
-    end,
-  },
   { "imsnif/kdl.vim" },
 }
