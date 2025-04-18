@@ -13,6 +13,7 @@ return {
     cmd = "Neotree",
     keys = {
       { "\\", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
+      { "|", ":Neotree toggle show git_status right<CR>", desc = "NeoTree GitStatus", silent = true },
     },
     opts = {
       close_if_last_window = true,
