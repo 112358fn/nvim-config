@@ -1,32 +1,40 @@
 return {
-  -- mason-null-ls.nvim
-  -- Mason extension for none-ls as SOT
+  -- mason-conform.nvim
+  -- Mason extension for conform as SOT
   {
-    "jay-babu/mason-null-ls.nvim",
+    "zapling/mason-conform.nvim",
     dependencies = {
       "williamboman/mason.nvim",
+      "stevearc/conform.nvim",
     },
     opts = {
-      automatic_installation = true,
+      ignore_install = {},
     },
   },
-  -- none-ls.nvim
-  -- Expose non-lsp tools as LSP sources
+  -- conform.nvim
+  -- Lightweight formatter manager
   {
-    "nvimtools/none-ls.nvim",
-    main = "null-ls",
-    dependencies = {
-      "jay-babu/mason-null-ls.nvim",
+    "stevearc/conform.nvim",
+    opts = {
+      log_level = vim.log.levels.DEBUG,
+      formatters_by_ft = {
+        lua = { "stylua" },
+        markdown = { "prettier" },
+        python = { "ruff_format" },
+        go = { "gofmt" },
+      },
     },
-    opts = function()
-      local null_ls = require("null-ls")
-      return {
-        sources = {
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.diagnostics.markdownlint,
-          null_ls.builtins.formatting.prettier,
-        },
-      }
+    keys = {
+      {
+        "<leader>f",
+        function()
+          require("conform").format({ async = true })
+        end,
+        desc = "[f]ormat",
+      },
+    },
+    init = function()
+      vim.o.formatexpr = [[v:lua.require'conform'.formatexpr()]]
     end,
   },
   { "imsnif/kdl.vim" },
