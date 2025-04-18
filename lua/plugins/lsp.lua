@@ -35,11 +35,17 @@ return {
   {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
-    config = true,
+    opts = {
+      lightbulb = {
+        enable = false,
+      },
+    },
     keys = {
-      { "<leader>ca", "<cmd>Lspsaga code_action<cr>", desc = "LSP code action" },
-      { "K",          "<cmd>Lspsaga hover_doc<cr>",   desc = "LSP hover" },
-      { "<leader>to", "<cmd>Lspsaga outline<cr>",     desc = "LSP outline" },
+      { "<leader>ca", "<cmd>Lspsaga code_action<cr>",     desc = "LSP code action" },
+      { "K",          "<cmd>Lspsaga hover_doc<cr>",       desc = "LSP hover" },
+      { "gd",         "<cmd>Lspsaga goto_definition<cr>", desc = "LSP definition" },
+      { "gr",         "<cmd>Lspsaga rename<cr>",          desc = "LSP rename" },
+      { "<leader>to", "<cmd>Lspsaga outline<cr>",         desc = "LSP outline" },
     },
   },
 }
