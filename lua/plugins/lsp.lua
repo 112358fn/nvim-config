@@ -49,4 +49,11 @@ return {
       { "<leader>to", "<cmd>Lspsaga outline<cr>",         desc = "LSP outline" },
     },
   },
+  -- lazy-dev.nvim
+  -- LuaLS setup for neovim
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    config = true,
+  },
 }
