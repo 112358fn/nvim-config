@@ -16,6 +16,8 @@ return {
         { "<leader>hs", "<cmd>Gitsigns stage_hunk<cr>",      desc = "git [s]tage hunk" },
         { "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "git [u]ndo stage hunk" },
         { "<leader>hr", "<cmd>Gitsigns reset_hunk<cr>",      desc = "git [r]eset hunk" },
+        { "<leader>h]", "<cmd>Gitsigns nav_hunk next<cr>", desc = "git next hunk" },
+        { "<leader>h[", "<cmd>Gitsigns nav_hunk prev<cr>", desc = "git previous hunk" },
         -- Visual hunks
         {
           "<leader>hs",
