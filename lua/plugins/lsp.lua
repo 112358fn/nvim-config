@@ -43,11 +43,12 @@ return {
       },
     },
     keys = {
-      { "<leader>ca", "<cmd>Lspsaga code_action<cr>",     desc = "LSP code action" },
-      { "K",          "<cmd>Lspsaga hover_doc<cr>",       desc = "LSP hover" },
-      { "gd",         "<cmd>Lspsaga goto_definition<cr>", desc = "LSP definition" },
-      { "gr",         "<cmd>Lspsaga rename<cr>",          desc = "LSP rename" },
-      { "<leader>to", "<cmd>Lspsaga outline<cr>",         desc = "LSP outline" },
+      { "<leader>ca", "<cmd>Lspsaga code_action<cr>", desc = "LSP code action" },
+      { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "LSP hover" },
+      { "gd", "<cmd>Lspsaga goto_definition<cr>", desc = "LSP definition" },
+      { "gr", "<cmd>Lspsaga rename<cr>", desc = "LSP rename" },
+      { "<leader>to", "<cmd>Lspsaga outline<cr>", desc = "LSP outline" },
+      { "<C-W>d", "<cmd>Lspsaga show_cursor_diagnostics<cr>", desc = "LSP show cursor diagnostics" },
     },
   },
   -- lazy-dev.nvim
