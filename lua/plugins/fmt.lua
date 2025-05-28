@@ -19,7 +19,7 @@ return {
       log_level = vim.log.levels.DEBUG,
       formatters_by_ft = {
         lua = { "stylua" },
-        markdown = { "prettier" },
+        markdown = { "prettier", "markdownlint" },
         python = { "ruff_format" },
         go = { "gofmt" },
       },
