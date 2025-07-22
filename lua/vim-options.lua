@@ -22,10 +22,10 @@ vim.opt.shiftwidth = 2
 -- Automatic formating options
 vim.opt.textwidth = 79
 vim.opt.formatoptions = {
-  t = true, -- Autowrap using textwidth
+  t = false, -- Autowrap using textwidth
   c = true, -- Autowrap comments
   r = true, -- Insert comment leader with <Enter>
-  o = true, -- Insert comment with 'O' or 'o'
+  o = false, -- Insert comment with 'O' or 'o'
   w = true, -- Whitespace continues paragraph
   j = true, -- Join comments
   q = true, -- Format comments with gq
@@ -81,7 +81,7 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "» ", lead = "·", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
