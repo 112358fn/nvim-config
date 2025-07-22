@@ -19,7 +19,7 @@ return {
       close_if_last_window = true,
       filesystem = {
         hijack_netrw_behavior = "open_default",
-        use_libuv_file_watcher = false,
+        use_libuv_file_watcher = true,
         follow_current_file = {
           enabled = true,
           leave_dirs_open = true,
