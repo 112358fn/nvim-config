@@ -29,6 +29,7 @@ return {
       lspconfig.bashls.setup({ capabilities = capabilities })
       lspconfig.rust_analyzer.setup({ capabilities = capabilities })
       lspconfig.taplo.setup({ capabilities = capabilities })
+      lspconfig.ts_ls.setup({ capabilities = capabilities })
     end,
   },
   -- lspsaga.nvim
