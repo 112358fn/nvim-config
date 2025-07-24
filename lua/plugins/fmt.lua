@@ -21,7 +21,7 @@ return {
         lua = { "stylua" },
         markdown = { "prettier", "markdownlint" },
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-        go = { "gofmt" },
+        go = { "gofmt", "goimports" },
       },
     },
     keys = {
