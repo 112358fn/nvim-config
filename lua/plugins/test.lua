@@ -15,6 +15,7 @@ return {
             args = { "--no-capture" },
             dap_adapter = "codelldb",
           }),
+          require("neotest-golang"),
         },
       })
     end,
@@ -40,5 +41,11 @@ return {
   },
   {
     "rouge8/neotest-rust",
+  },
+  {
+    "fredrikaverpil/neotest-golang",
+    dependencies = {
+          "leoluz/nvim-dap-go",
+    },
   },
 }
