@@ -1,16 +1,4 @@
 return {
-  -- mason-conform.nvim
-  -- Mason extension for conform as SOT
-  {
-    "zapling/mason-conform.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "stevearc/conform.nvim",
-    },
-    opts = {
-      ignore_install = {},
-    },
-  },
   -- conform.nvim
   -- Lightweight formatter manager
   {

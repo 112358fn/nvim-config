@@ -1,26 +1,8 @@
 return {
-  -- mason-nvim-dap.nvim
-  -- Mason extension for nvim-dap as SOT
-  -- NOTE: automatic_installation is not working
-  -- use ensure_installed instead
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-    },
-    opts = {
-      -- automatic_installation = true,
-      ensure_installed = { "delve", "codelldb", "python" },
-      handlers = {},
-    },
-  },
   -- nvim-dap
   -- DAP client for neovim
   {
     "mfussenegger/nvim-dap",
-    dependencies = {
-      "jay-babu/mason-nvim-dap.nvim",
-    },
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")

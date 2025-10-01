@@ -1,21 +1,9 @@
 return {
-  -- mason-lspconfig.nvim
-  -- Mason extension for lspconfig as SOT
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-    },
-    opts = {
-      automatic_installation = true,
-    },
-  },
   -- nvim-lspconfig
   -- neovim default configurations for LSP servers
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
       "saghen/blink.cmp",
     },
     config = function()
