@@ -10,6 +10,8 @@ return {
         markdown = { "prettier", "markdownlint" },
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
         go = { "gofmt", "goimports" },
+        tex = { "tex-fmt" },
+        nix = { "nixfmt" },
       },
     },
     keys = {
