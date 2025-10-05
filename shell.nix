@@ -3,7 +3,6 @@ let
 in
 pkgs.mkShellNoCC {
   packages = with pkgs; [
-    nixfmt-rfc-style
     lua-language-server
     stylua
   ];
