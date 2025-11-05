@@ -7,17 +7,15 @@ return {
       "saghen/blink.cmp",
     },
     config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({ capabilities = capabilities })
-      lspconfig.pyright.setup({ capabilities = capabilities })
-      lspconfig.marksman.setup({ capabilities = capabilities, single_file_support = false })
-      lspconfig.gopls.setup({ capabilities = capabilities })
-      lspconfig.yamlls.setup({ capabilities = capabilities })
-      lspconfig.bashls.setup({ capabilities = capabilities })
-      lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-      lspconfig.taplo.setup({ capabilities = capabilities })
-      lspconfig.ts_ls.setup({ capabilities = capabilities })
+      vim.lsp.enable('lua_ls')
+      vim.lsp.enable('pyright')
+      vim.lsp.enable('marksman')
+      vim.lsp.enable('gopls')
+      vim.lsp.enable('yamlls')
+      vim.lsp.enable('bashls')
+      vim.lsp.enable('rust_analyzer')
+      vim.lsp.enable('taplo')
+      vim.lsp.enable('ts_ls')
     end,
   },
   -- lspsaga.nvim
