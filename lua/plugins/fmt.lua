@@ -7,11 +7,12 @@ return {
       log_level = vim.log.levels.DEBUG,
       formatters_by_ft = {
         lua = { "stylua" },
-        markdown = { "prettier", "markdownlint" },
+        markdown = { "prettierd", "markdownlint" },
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
         go = { "gofmt", "goimports" },
         tex = { "tex-fmt" },
         nix = { "nixfmt" },
+        rust = { "rustfmt" },
       },
     },
     keys = {
