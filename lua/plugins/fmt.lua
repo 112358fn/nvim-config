@@ -13,6 +13,7 @@ return {
         tex = { "tex-fmt" },
         nix = { "nixfmt" },
         rust = { "rustfmt" },
+        yaml = { "yq" },
       },
     },
     keys = {
