@@ -6,6 +6,7 @@ return {
       "nvim-neotest/nvim-nio",
     },
     config = function()
+      ---@diagnostic disable: missing-fields
       require("neotest").setup({
         adapters = {
           require("neotest-python")({
@@ -18,11 +19,13 @@ return {
           require("neotest-golang"),
         },
       })
+      ---@diagnostic enable
     end,
     keys = {
       {
         "<leader>dt",
         function()
+          ---@diagnostic disable-next-line: missing-fields
           require("neotest").run.run({ strategy = "dap" })
         end,
         desc = "[d]ebug [t]est",
@@ -45,7 +48,7 @@ return {
   {
     "fredrikaverpil/neotest-golang",
     dependencies = {
-          "leoluz/nvim-dap-go",
+      "leoluz/nvim-dap-go",
     },
   },
 }
