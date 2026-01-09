@@ -1,13 +1,19 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
-      local config = require("nvim-treesitter.configs")
-      config.setup({
-        ensure_installed = { "lua", "python", "rust", "go" },
-        highlight = { enable = true },
-        indent = { enable = true },
+      require("nvim-treesitter").install({ "lua", "python", "rust", "go" })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "lua", "python", "rust", "go" },
+        callback = function()
+          -- syntax highlighting, provided by Neovim
+          vim.treesitter.start()
+          -- indentation, provided by nvim-treesitter
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
       })
     end,
   },
@@ -22,6 +28,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     opts = {
+      ---@diagnostic disable-next-line: unused-local
       provider_selector = function(bufnr, filetype, buftype)
         return { "treesitter", "indent" }
       end,
