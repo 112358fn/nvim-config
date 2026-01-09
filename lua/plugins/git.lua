@@ -1,5 +1,13 @@
 return {
-  { "tpope/vim-fugitive" },
+  {
+    "tpope/vim-fugitive",
+    init = function()
+      vim.api.nvim_create_autocmd("BufReadPost", {
+        pattern = {"fugitive://*"},
+        command = "set bufhidden=delete",
+      })
+    end,
+  },
   {
     "ruifm/gitlinker.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
