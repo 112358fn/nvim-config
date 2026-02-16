@@ -14,6 +14,7 @@ return {
         nix = { "nixfmt" },
         rust = { "rustfmt" },
         yaml = { "yq" },
+        css = { "css_beautify" },
       },
     },
     keys = {
