@@ -5,7 +5,7 @@ return {
     lazy = false,
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter").install({ "lua", "python", "rust", "go" })
+      require("nvim-treesitter").install({ "lua", "python", "rust", "go", "yaml"})
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "lua", "python", "rust", "go" },
         callback = function()
