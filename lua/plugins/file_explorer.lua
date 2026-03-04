@@ -1,6 +1,13 @@
 return {
   { "nvim-lua/plenary.nvim" },
-  { "s1n7ax/nvim-window-picker" },
+  {
+    "s1n7ax/nvim-window-picker",
+    name = "window-picker",
+    opts = {
+      hint = "floating-big-letter",
+      version = '2.*',
+    },
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     version = "*",
@@ -9,6 +16,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
+      "s1n7ax/nvim-window-picker",
     },
     cmd = "Neotree",
     keys = {
