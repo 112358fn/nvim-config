@@ -9,6 +9,10 @@ return {
     end,
   },
   {
+    -- vim-rhubarb enables GitHub integration for fugitive (e.g., :Gbrowse)
+    "tpope/vim-rhubarb",
+  },
+  {
     "ruifm/gitlinker.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
