@@ -16,6 +16,7 @@ return {
       vim.lsp.enable('rust_analyzer')
       vim.lsp.enable('taplo')
       vim.lsp.enable('ts_ls')
+      vim.lsp.enable('terraformls')
     end,
   },
   -- lspsaga.nvim

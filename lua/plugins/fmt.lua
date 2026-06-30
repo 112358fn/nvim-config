@@ -15,6 +15,7 @@ return {
         rust = { "rustfmt" },
         yaml = { "yq" },
         css = { "css_beautify" },
+        terraform = { "terraform_fmt" },
       },
     },
     keys = {
