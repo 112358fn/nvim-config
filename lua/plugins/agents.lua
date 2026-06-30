@@ -2,7 +2,26 @@ return {
   {
     "olimorris/codecompanion.nvim",
     version = "^19.0.0",
-    opts = {},
+    opts = {
+      interactions = {
+        chat = {
+          adapter = "claude_code",
+        },
+        inline = {
+          adapter = "claude_code",
+        },
+        cmd = {
+          adapter = "claude_code",
+        },
+      },
+      adapters = {
+        http = {
+          opts = {
+            show_presets = false,
+          },
+        },
+      },
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
