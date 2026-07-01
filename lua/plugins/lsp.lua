@@ -17,6 +17,7 @@ return {
       vim.lsp.enable('taplo')
       vim.lsp.enable('ts_ls')
       vim.lsp.enable('terraformls')
+      vim.lsp.enable('nixd')
     end,
   },
   -- lspsaga.nvim
