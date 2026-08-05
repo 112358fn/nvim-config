@@ -15,7 +15,15 @@ return {
   {
     "ruifm/gitlinker.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = true,
+    config = function()
+      require("gitlinker").setup({
+        callbacks = {
+          -- self-hosted forgejo, which uses gitea-style urls:
+          -- https://forge.skygrid.ai/<owner>/<repo>/src/commit/<sha>/<file>#L1-L2
+          ["forge%.skygrid%.ai"] = require("gitlinker.hosts").get_gitea_type_url,
+        },
+      })
+    end,
   },
   {
     "lewis6991/gitsigns.nvim",
