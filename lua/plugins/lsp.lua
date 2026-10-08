@@ -7,17 +7,26 @@ return {
       "saghen/blink.cmp",
     },
     config = function()
-      vim.lsp.enable('lua_ls')
-      vim.lsp.enable('pyright')
-      vim.lsp.enable('marksman')
-      vim.lsp.enable('gopls')
-      vim.lsp.enable('yamlls')
-      vim.lsp.enable('bashls')
-      vim.lsp.enable('rust_analyzer')
-      vim.lsp.enable('taplo')
-      vim.lsp.enable('ts_ls')
-      vim.lsp.enable('terraformls')
-      vim.lsp.enable('nixd')
+      vim.lsp.enable("lua_ls")
+      vim.lsp.enable("pyright")
+      vim.lsp.enable("marksman")
+      vim.lsp.enable("gopls")
+      vim.lsp.enable("yamlls")
+      vim.lsp.enable("bashls")
+      vim.lsp.enable("rust_analyzer")
+      vim.lsp.enable("taplo")
+      vim.lsp.enable("ts_ls")
+      vim.lsp.enable("terraformls")
+      vim.lsp.enable("nixd")
+      -- ZK for notes and marksman for any other md
+      vim.lsp.config("marksman", {
+        root_dir = function(bufnr, on_dir)
+          if vim.fs.root(bufnr, { ".zk" }) then
+            return
+          end
+          on_dir(vim.fs.root(bufnr, { ".marksman.toml", ".git" }) or vim.fn.getcwd())
+        end,
+      })
     end,
   },
   -- lazy-dev.nvim
