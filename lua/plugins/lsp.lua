@@ -27,6 +27,18 @@ return {
           on_dir(vim.fs.root(bufnr, { ".marksman.toml", ".git" }) or vim.fn.getcwd())
         end,
       })
+
+      -- Go to definition
+      -- which is different but similar of C-[ which uses tagfunc
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true }),
+        callback = function(ev)
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+            buffer = ev.buf,
+            desc = "Go to definition",
+          })
+        end,
+      })
     end,
   },
   -- lazy-dev.nvim
