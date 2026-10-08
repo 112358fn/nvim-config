@@ -48,4 +48,9 @@ return {
     ft = "lua", -- only load on lua files
     config = true,
   },
+  {
+    "ravibrock/spellwarn.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
 }
