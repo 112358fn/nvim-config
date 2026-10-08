@@ -1,10 +1,29 @@
 return {
   {
+    dir = "~/.config/nvim/lua/plugins/review",
+    main = "review",
+    dependencies = { "tpope/vim-fugitive", "lewis6991/gitsigns.nvim" },
+    cmd = { "ReviewStart", "ReviewNext", "ReviewPrev", "ReviewStop" },
+    keys = {
+      { "]r", "<cmd>ReviewNext<cr>", desc = "Review: next commit" },
+      { "[r", "<cmd>ReviewPrev<cr>", desc = "Review: previous commit" },
+    },
+    opts = { base = "origin/main" },
+  },
+  {
     "tpope/vim-fugitive",
     init = function()
       vim.api.nvim_create_autocmd("BufReadPost", {
-        pattern = {"fugitive://*"},
+        pattern = { "fugitive://*" },
         command = "set bufhidden=delete",
+      })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "FugitiveCommit",
+        callback = function()
+          vim.opt_local.foldmethod = "expr"
+          vim.opt_local.foldexpr = [[getline(v:lnum) =~# '^diff --git' ? '0' : getline(v:lnum) =~# '^@@' ? '1' : '=']]
+          vim.opt_local.foldlevel = 0
+        end,
       })
     end,
   },
