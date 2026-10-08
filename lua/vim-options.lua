@@ -96,7 +96,13 @@ vim.opt.scrolloff = 10
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- Set buffer diagnosticts to quickfix list
+vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer diagnostics to quickfix list"})
+
 -- Global statusline
 vim.opt.laststatus = 3
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`-- [[ Basic Autocommands ]]
+vim.opt.spell = true
+vim.opt.spelllang="en"
+vim.opt.spelloptions="camel,noplainbuffer"
