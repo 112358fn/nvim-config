@@ -16,7 +16,7 @@ return {
             args = { "--no-capture" },
             dap_adapter = "codelldb",
           }),
-          require("neotest-golang"),
+          require("neotest-golang")({ runner = "gotestsum" }),
         },
       })
       ---@diagnostic enable
@@ -26,7 +26,7 @@ return {
         "<leader>dt",
         function()
           ---@diagnostic disable-next-line: missing-fields
-          require("neotest").run.run({ strategy = "dap" })
+          require("neotest").run.run({ suite = false, strategy = "dap" })
         end,
         desc = "[d]ebug [t]est",
       },
@@ -47,6 +47,7 @@ return {
   },
   {
     "fredrikaverpil/neotest-golang",
+    version = "*",
     dependencies = {
       "leoluz/nvim-dap-go",
     },
