@@ -1,48 +1,17 @@
 return {
   {
-    "olimorris/codecompanion.nvim",
-    version = "^19.0.0",
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
     opts = {
-      interactions = {
-        chat = {
-          adapter = "claude_code",
-        },
-        inline = {
-          adapter = "claude_code",
-        },
-        cmd = {
-          adapter = "claude_code",
-        },
-      },
-      adapters = {
-        http = {
-          opts = {
-            show_presets = false,
-          },
-        },
+      terminal = {
+        provider = "none",
       },
     },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
+    config = true,
     keys = {
-      {
-        "<leader>aa",
-        "<cmd>CodeCompanionActions<cr>",
-        desc = "Open CodeCompanion",
-      },
-      {
-        "<leader>ac",
-        "<cmd>CodeCompanionChat Toggle<cr>",
-        desc = "Toggle CodeCompanion Chat",
-      },
-      {
-        "<leader>av",
-        "<cmd>CodeCompanionChat Add<cr>",
-        desc = "Add selection to CodeCompanion Chat",
-        mode = "v",
-      },
+      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send selection to Claude" },
+      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
     },
   },
 }
