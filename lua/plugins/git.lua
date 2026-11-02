@@ -72,7 +72,7 @@ return {
           function()
             gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
           end,
-          desc = "stage git hunk",
+          desc = "reset git hunk",
         },
         -- Toggle
         {
